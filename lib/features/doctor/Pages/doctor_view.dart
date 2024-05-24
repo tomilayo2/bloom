@@ -1,6 +1,8 @@
 import 'package:bloom/features/Authentication/widgets/app_button.dart';
+import 'package:bloom/features/doctor/models/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../constant/app_color.dart';
 import '../widgets/doctors_card.dart';
@@ -229,19 +231,20 @@ class _DoctorViewState extends State<DoctorView> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
                 childAspectRatio: 0.7,
               ),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
+              itemCount: doctorList.length,
               itemBuilder: (context, index) {
-                return  DoctorsCard();
+                return  DoctorsCard(
+                  doctorModel: doctorList[index],
+                );
               },
             ),
           ],
