@@ -142,71 +142,71 @@ class LogInPage extends StatelessWidget {
                           ));
                     },
                   ),
-                  SizedBox(height: 25,),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Color(0xFFE4E7EC),
-                          height: 36,
-                          thickness: 1.8,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "OR",
-                          style: GoogleFonts.inter(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF667185)
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: Color(0xFFE4E7EC),
-                          height: 36,
-                          thickness: 1.8,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: (){},
-                        child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Color(0xFF98A2B3)
-                                )
-                            ),
-                            child: Image.asset("assets/images/google_image.png")
-                        ),
-                      ),
-                      SizedBox(width: 40,),
-                      GestureDetector(
-                        onTap: (){},
-                        child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Color(0xFF98A2B3)
-                                )
-                            ),
-                            child: Image.asset("assets/images/ios_image.png")
-                        ),
-                      ),
-                    ],
-                  ),
+                  // SizedBox(height: 25,),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Divider(
+                  //         color: Color(0xFFE4E7EC),
+                  //         height: 36,
+                  //         thickness: 1.8,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Text(
+                  //         "OR",
+                  //         style: GoogleFonts.inter(
+                  //             fontSize: 12,
+                  //             fontWeight: FontWeight.w500,
+                  //             color: Color(0xFF667185)
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Divider(
+                  //         color: Color(0xFFE4E7EC),
+                  //         height: 36,
+                  //         thickness: 1.8,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  // SizedBox(height: 30,),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     GestureDetector(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //           height: 50,
+                  //           width: 50,
+                  //           decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               border: Border.all(
+                  //                   color: Color(0xFF98A2B3)
+                  //               )
+                  //           ),
+                  //           child: Image.asset("assets/images/google_image.png")
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 40,),
+                  //     GestureDetector(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //           height: 50,
+                  //           width: 50,
+                  //           decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               border: Border.all(
+                  //                   color: Color(0xFF98A2B3)
+                  //               )
+                  //           ),
+                  //           child: Image.asset("assets/images/ios_image.png")
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 50,),
                   Row(
                     children: [

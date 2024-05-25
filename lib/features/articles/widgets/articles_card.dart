@@ -1,3 +1,4 @@
+import 'package:bloom/features/articles/pages/article_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +35,9 @@ class ArticlesCard extends StatelessWidget {
           ),
           SizedBox(height: 15,),
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> ArticlePage()));
+            },
             child: Text(
               "Learn more",
               style: GoogleFonts.inter(

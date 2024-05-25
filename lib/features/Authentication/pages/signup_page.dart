@@ -298,52 +298,52 @@ class _SignUpPageState extends State<SignUpPage> {
                           ));
                     },
                   ),
-                  SizedBox(height: 20,),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Color(0xFFE4E7EC),
-                          height: 36,
-                          thickness: 1.8,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "OR",
-                          style: GoogleFonts.inter(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF667185)
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                          child: Divider(
-                            color: Color(0xFFE4E7EC),
-                            height: 36,
-                            thickness: 1.8,
-                          ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 25,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialButton(
-                          imagePath: "assets/images/google_image.png",
-                        onTap: (){},
-                      ),
-                      SizedBox(width: 40,),
-                      SocialButton(
-                        imagePath: "assets/images/ios_image.png",
-                        onTap: (){},
-                      ),
-
-                    ],
-                  ),
+                  // SizedBox(height: 20,),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Divider(
+                  //         color: Color(0xFFE4E7EC),
+                  //         height: 36,
+                  //         thickness: 1.8,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Text(
+                  //           "OR",
+                  //         style: GoogleFonts.inter(
+                  //             fontSize: 12,
+                  //             fontWeight: FontWeight.w500,
+                  //             color: Color(0xFF667185)
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //         child: Divider(
+                  //           color: Color(0xFFE4E7EC),
+                  //           height: 36,
+                  //           thickness: 1.8,
+                  //         ),
+                  //     )
+                  //   ],
+                  // ),
+                  // SizedBox(height: 25,),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     SocialButton(
+                  //         imagePath: "assets/images/google_image.png",
+                  //       onTap: (){},
+                  //     ),
+                  //     SizedBox(width: 40,),
+                  //     SocialButton(
+                  //       imagePath: "assets/images/ios_image.png",
+                  //       onTap: (){},
+                  //     ),
+                  //
+                  //   ],
+                  // ),
                   SizedBox(height: 30,),
                   Row(
                     children: [

@@ -93,7 +93,7 @@ class _ReminderPageState extends State<ReminderPage> {
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Anything you would like to let the doctor know",
+                      hintText: "Full details of what you want to be reminded of",
                       hintStyle: GoogleFonts.inter(
                           fontSize: 12,
                           color: AppColor.appGreyColor,
@@ -111,13 +111,26 @@ class _ReminderPageState extends State<ReminderPage> {
             child: SizedBox(
                 height: 58,
                 child: DropdownButtonFormField<String>(
-                    hint: Text(
-                      "Select Option",
-                      style: GoogleFonts.inter(
-                          fontSize: 12,
-                          color: AppColor.appGreyColor,
-                          fontWeight: FontWeight.w400
-                      ),
+                    hint: Row(
+                      children: [
+                        Text(
+                          "Reminder",
+                          style: GoogleFonts.inter(
+                              fontSize: 15,
+                              color: AppColor.appTextColor,
+                              fontWeight: FontWeight.w400
+                          ),
+                        ),
+                        SizedBox(width: 150,),
+                        Text(
+                          "Select Option",
+                          style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: AppColor.appGreyColor,
+                              fontWeight: FontWeight.w400
+                          ),
+                        ),
+                      ],
                     ),
 
                     decoration: const InputDecoration(
@@ -168,13 +181,26 @@ class _ReminderPageState extends State<ReminderPage> {
             child: SizedBox(
                 height: 58,
                 child: DropdownButtonFormField<String>(
-                    hint: Text(
-                      "Select Option",
-                      style: GoogleFonts.inter(
-                          fontSize: 12,
-                          color: AppColor.appGreyColor,
-                          fontWeight: FontWeight.w400
-                      ),
+                    hint: Row(
+                      children: [
+                        Text(
+                          "Reminder",
+                          style: GoogleFonts.inter(
+                              fontSize: 15,
+                              color: AppColor.appTextColor,
+                              fontWeight: FontWeight.w400
+                          ),
+                        ),
+                        SizedBox(width: 150,),
+                        Text(
+                          "Select Option",
+                          style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: AppColor.appGreyColor,
+                              fontWeight: FontWeight.w400
+                          ),
+                        ),
+                      ],
                     ),
 
                     decoration: const InputDecoration(

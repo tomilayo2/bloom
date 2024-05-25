@@ -1,5 +1,6 @@
 import 'package:bloom/constant/app_color.dart';
 import 'package:bloom/features/Authentication/pages/signup_page.dart';
+import 'package:bloom/features/doctor/Pages/doctor_availability.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +32,7 @@ class DoctorProfile extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   border: Border.all(color: AppColor.appBorderColor)
                 ),
-                child: Image.asset("assets/images/love_image.png",color: AppColor.appAppColor,),
+                child: Image.asset("assets/icons/chat_icon.png",color: AppColor.appAppColor,),
               ),
               SizedBox(width: 10,),
               Container(
@@ -43,7 +44,7 @@ class DoctorProfile extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   border: Border.all(color: AppColor.appBorderColor)
                 ),
-                child: Image.asset("assets/images/love_image.png",color: AppColor.appAppColor,),
+                child: Image.asset("assets/icons/heart_icon.png",color: AppColor.appAppColor,),
               ),
               SizedBox(width: 10,),
               Container(
@@ -55,7 +56,7 @@ class DoctorProfile extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   border: Border.all(color: AppColor.appBorderColor)
                 ),
-                child: Image.asset("assets/images/love_image.png",color: AppColor.appAppColor,),
+                child: Image.asset("assets/icons/circum_menu_icon.png",color: AppColor.appAppColor,),
               ),
             ],
           ),
@@ -406,7 +407,11 @@ class DoctorProfile extends StatelessWidget {
               SizedBox(height: 20,),
               AppButton(
                 text: 'View full availability',
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => DoctorAvailability()
+                  ));
+                },
               ),
             ],
           )

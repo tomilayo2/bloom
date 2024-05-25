@@ -4,8 +4,24 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../constant/app_color.dart';
 import '../widgets/articles_card.dart';
 
-class ArticlesView extends StatelessWidget {
+class ArticlesView extends StatefulWidget {
   const ArticlesView({super.key});
+
+  @override
+  State<ArticlesView> createState() => _ArticlesViewState();
+}
+
+class _ArticlesViewState extends State<ArticlesView> {
+
+  int _buttonIndex = 0;
+  final _allCommunityWidgets = [
+  // Article (),
+  Container(),
+  //Video Widget(),
+  Container(),
+  // Saved Widget(),
+  Container()
+];
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +87,98 @@ class ArticlesView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30,),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        _buttonIndex = 0;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: _buttonIndex == 0
+                            ?AppColor.appPinkColor
+                            : AppColor.appGeneralColor,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        "Articles",
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _buttonIndex == 0
+                                ?AppColor.appAppColor
+                                :AppColor.appSubTitleColor
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        _buttonIndex = 1;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: _buttonIndex == 1
+                            ?AppColor.appPinkColor
+                            : AppColor.appGeneralColor,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        "Videos",
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _buttonIndex == 1
+                                ?AppColor.appAppColor
+                                :AppColor.appSubTitleColor
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        _buttonIndex = 2;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: _buttonIndex == 2
+                            ?AppColor.appPinkColor
+                            :AppColor.appGeneralColor,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        "Saved",
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _buttonIndex == 2
+                                ?AppColor.appAppColor
+                                :AppColor.appSubTitleColor
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                ],
+              ),
+            ),
+            SizedBox(height: 30,),
             GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
@@ -84,7 +192,6 @@ class ArticlesView extends StatelessWidget {
                   return  ArticlesCard();
                 }
             ),
-
           ],
         ),
       )

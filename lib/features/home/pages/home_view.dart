@@ -35,7 +35,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: ListView(
           //padding: EdgeInsets.all(16.0),
