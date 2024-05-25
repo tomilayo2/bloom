@@ -6,11 +6,24 @@ import '../../../constant/app_color.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    this.suffixIcon, required this.hintText,
+    this.suffixIcon,
+    required this.hintText,
+    this.keyboardType,
+    this.onChanged,
+    this.obscureText = false,
+    this.validator,
+    this.controller,
+    this.errorText,
   });
 
   final Widget? suffixIcon;
   final String hintText;
+  final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +36,14 @@ class CustomTextField extends StatelessWidget {
       height: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: TextField(
+        child: TextFormField(
+          obscureText: obscureText,
+          obscuringCharacter: '*',
+          onChanged: onChanged,
+          keyboardType: keyboardType,
+          validator: validator,
           decoration: InputDecoration(
+              errorText: errorText,
               suffixIcon: suffixIcon,
               hintText: hintText,
               hintStyle: GoogleFonts.inter(

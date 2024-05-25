@@ -2,8 +2,11 @@ import 'package:bloom/constant/app_color.dart';
 import 'package:bloom/features/Authentication/pages/login_page.dart';
 import 'package:bloom/features/Authentication/widgets/social_button.dart';
 import 'package:bloom/features/home/pages/disclaimer_page.dart';
+import 'package:bloom/services/bloom_service.dart';
+import 'package:bloom/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toastification/toastification.dart';
 
 import '../widgets/app_button.dart';
 import '../widgets/custom_textfield.dart';
@@ -18,8 +21,50 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   int _value = 1;
+  bool _isLoading = false;
+  bool _showPassword = true;
 
-  bool value = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool minimumCharacterValue = false;
+  bool hasUpperCaseValue = false;
+  bool hasSpecialCharacterValue = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String email = "";
+  String password = "";
+  final bloomService = BloomService();
+  final toast = Toastification();
+
+  Future<void> _registerUser({required String email, required String password}) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final result = await bloomService.registerUser(email: email, password: password);
+
+    if (!mounted) return;
+
+    setState(() {
+      _isLoading = false;
+    });
+    if(result.isSuccessful){
+      Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DisclaimerPage()
+                    ));
+    }else{
+      toast.show(
+          context: context,
+          type: ToastificationType.error,
+          style: ToastificationStyle.fillColored,
+          alignment: Alignment.bottomCenter,
+          primaryColor: Colors.red,
+          description: const SizedBox.shrink(),
+          autoCloseDuration: const Duration(seconds: 3),
+          title: Text(result.message),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,24 +138,53 @@ class _SignUpPageState extends State<SignUpPage> {
                       fontWeight: FontWeight.w600
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTitle(
-                        title: 'Email Address/Phone Number',),
-                     CustomTextField(hintText: 'Enter email/phone number',),
-                      SizedBox(height: 15,),
-                      CustomTitle(
+                      const CustomTitle(
+                        title: 'Email Address',),
+                      CustomTextField(
+                       hintText: 'Enter email',
+                       keyboardType: TextInputType.emailAddress,
+                       controller: emailController,
+                       //errorText: '',
+                       onChanged: (value){
+                        email = value;
+                       },
+                       validator: (value) => Validation.validateEmail(value)
+                     ),
+                      const SizedBox(height: 15,),
+                      const CustomTitle(
                         title: 'Password',),
                       CustomTextField(
-                       suffixIcon: Icon(
-                         Icons.remove_red_eye_outlined,color: Colors.grey.shade600,),
-                        hintText: '********',
+                       suffixIcon: IconButton(
+                         icon: const Icon(Icons.remove_red_eye_outlined),
+                         color: Colors.grey.shade600,
+                         onPressed: () {
+                           setState(() {
+                             _showPassword =!_showPassword;
+                           });
+                         },),
+                        hintText: 'Enter password',
+                        controller: passwordController,
+                        onChanged: (value){
+                         password = value;
+                        },
+                        obscureText: _showPassword,
+                        validator: (value){
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters long';
+                          }
+                          return null;
+                        },
                      ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   // Column(
                   //   children: [
                   //     Row(
@@ -202,10 +276,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            value: value,
+                            value: minimumCharacterValue,
                             onChanged: (value){
                               setState(() {
-                                this.value = value!;
+                                minimumCharacterValue = value!;
                               });
                             },
                             activeColor: AppColor.appButtonColor,
@@ -218,32 +292,32 @@ class _SignUpPageState extends State<SignUpPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            value: value,
+                            value: hasUpperCaseValue,
                             onChanged: (value){
                               setState(() {
-                                this.value = value!;
+                                hasUpperCaseValue = value!;
                               });
                             },
                             activeColor: AppColor.appButtonColor,
                             checkColor: AppColor.appGeneralColor,
                           ),
-                          Text("Minimum of 8 characters"),
+                          const Text("At least 1 capital letter"),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            value: value,
+                            value: hasSpecialCharacterValue,
                             onChanged: (value){
                               setState(() {
-                                this.value = value!;
+                                hasSpecialCharacterValue = value!;
                               });
                             },
                             activeColor: AppColor.appButtonColor,
                             checkColor: AppColor.appGeneralColor,
                           ),
-                          Text("Minimum of 8 characters"),
+                          const Text("At least 1 special character, e.g. @, -"),
                         ],
                       ),
                     ],
@@ -290,12 +364,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: 20,),
                   AppButton(
+                    isLoading: _isLoading,
                     text: 'Sign Up',
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DisclaimerPage()
-                          ));
+                    onTap: ()async {
+                      await _registerUser(email: email, password: password);
                     },
                   ),
                   // SizedBox(height: 20,),

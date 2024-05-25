@@ -8,11 +8,12 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
+    this.isLoading = false,
   });
 
   final String text;
   final void Function()? onTap;
-
+  final bool isLoading;
 
 
   @override
@@ -27,13 +28,23 @@ class AppButton extends StatelessWidget {
             color: AppColor.appButtonColor,
             borderRadius: BorderRadius.circular(8.0)
         ),
-        child: Text(
-          textAlign: TextAlign.center ,
-          text,
-          style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColor.appTextColor
+        child: Visibility(
+          visible: !isLoading,
+          replacement: const Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(color: Colors.black,),
+            ],
+          ),
+          child: Text(
+            textAlign: TextAlign.center ,
+            text,
+            style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColor.appTextColor
+            ),
           ),
         ),
 

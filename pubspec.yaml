@@ -41,6 +41,8 @@ dependencies:
   intl: ^0.18.1
   table_calendar: ^3.0.8
   flutter_svg: ^2.0.4
+  http: ^1.1.0
+  toastification: ^1.2.1
 
 
 dev_dependencies:
