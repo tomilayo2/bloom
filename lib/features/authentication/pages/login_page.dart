@@ -8,9 +8,41 @@ import '../widgets/app_button.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/custom_title.dart';
 
-class LogInPage extends StatelessWidget {
+class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
 
+  @override
+  State<LogInPage> createState() => _LogInPageState();
+}
+
+class _LogInPageState extends State<LogInPage> {
+  bool _showPassword = true;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String email = "";
+  String password = "";
+  String? validateEmail(String? value) {
+    if (!RegExp(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{1,253}[a-zA-Z0-9])?)+$")
+        .hasMatch(value ?? "") ||
+        !value!.endsWith('.com')) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+  // bool _isMinLength = false;
+  // bool _hasNumber = false;
+  // bool _hasSpecialChar = false;
+
+  // void _validatePassword(String value) {
+  //   setState(() {
+  //     _isMinLength = value.length >= 6;
+  //     _hasNumber = value.contains(RegExp(r'\d'));
+  //     _hasSpecialChar = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,20 +120,66 @@ class LogInPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomTitle(
-                        title: 'Email Address/Phone Number',),
-                      CustomTextField(hintText: 'Email Address/Phone Number',),
-                      SizedBox(height: 15,),
-                      const CustomTitle(
-                        title: 'Password',),
-                      CustomTextField(
-                        suffixIcon: Icon(Icons.remove_red_eye_outlined,color: Colors.grey.shade600,),
-                        hintText: '********',
-                      ),
-                    ],
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTitle(
+                          title: 'Email Address/Phone Number',),
+                        CustomTextField(
+                          hintText: 'Email Address',
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                          onChanged: (value){
+                            email = value;
+                          },
+                          validator: validateEmail,
+                          //   if (value == null || value.isEmpty) {
+                          //     return 'Please enter an email';
+                          //   } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          //     return 'Please enter a valid email address';
+                          //   }
+                          //   return null;
+                          // },
+                        ),
+                        SizedBox(height: 15,),
+                        const CustomTitle(
+                          title: 'Password',),
+                        CustomTextField(
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.remove_red_eye_outlined),
+                            color: Colors.grey.shade600,
+                            onPressed: () {
+                              setState(() {
+                                _showPassword =!_showPassword;
+                              });
+                            },),
+                          hintText: 'Enter password',
+                          controller: passwordController,
+                          onChanged: (value){
+                            password = value;
+                          //  _validatePassword(value);
+                          },
+                          obscureText: _showPassword,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a password';
+                            // } else if (!_isMinLength) {
+                            //   return 'Password must be at least 6 characters long';
+                            // } else if (!_hasNumber) {
+                            //   return 'Password must contain at least one number';
+                            // } else if (!_hasSpecialChar) {
+                            //   return 'Password must contain at least one special character';
+                            }   else if (value.length < 8) {
+                              return 'Password must be at least 6 characters long';
+                            }
+                            return null;
+                          },
+
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 30,),
                   // Container(
@@ -136,6 +214,7 @@ class LogInPage extends StatelessWidget {
                   AppButton(
                     text: 'Log in',
                     onTap: (){
+                      _formKey.currentState!.validate();
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => DisclaimerPage()

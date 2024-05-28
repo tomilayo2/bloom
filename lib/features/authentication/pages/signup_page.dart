@@ -65,6 +65,23 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
+  bool _isMinLength = false;
+  bool _hasNumber = false;
+  bool _hasSpecialChar = false;
+
+  void _validatePassword(String value) {
+    setState(() {
+      _isMinLength = value.length >= 6;
+      _hasNumber = value.contains(RegExp(r'\d'));
+      _hasSpecialChar = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+
+
+      minimumCharacterValue = _isMinLength;
+      hasUpperCaseValue = _hasNumber;
+      hasSpecialCharacterValue = _hasSpecialChar;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,50 +156,71 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomTitle(
-                        title: 'Email Address',),
-                      CustomTextField(
-                       hintText: 'Enter email',
-                       keyboardType: TextInputType.emailAddress,
-                       controller: emailController,
-                       //errorText: '',
-                       onChanged: (value){
-                        email = value;
-                       },
-                       validator: (value) => Validation.validateEmail(value)
-                     ),
-                      const SizedBox(height: 15,),
-                      const CustomTitle(
-                        title: 'Password',),
-                      CustomTextField(
-                       suffixIcon: IconButton(
-                         icon: const Icon(Icons.remove_red_eye_outlined),
-                         color: Colors.grey.shade600,
-                         onPressed: () {
-                           setState(() {
-                             _showPassword =!_showPassword;
-                           });
-                         },),
-                        hintText: 'Enter password',
-                        controller: passwordController,
-                        onChanged: (value){
-                         password = value;
-                        },
-                        obscureText: _showPassword,
-                        validator: (value){
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters long';
-                          }
-                          return null;
-                        },
-                     ),
-                    ],
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTitle(
+                          title: 'Email Address',),
+                        CustomTextField(
+                         hintText: 'Enter email',
+                         keyboardType: TextInputType.emailAddress,
+                         controller: emailController,
+                         //errorText: '',
+                         onChanged: (value){
+                          email = value;
+                         },
+                         validator: (value) {
+                           if (value == null || value.isEmpty) {
+                             return 'Please enter an email';
+                           } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                             return 'Please enter a valid email address';
+                           }
+                           return null;
+                         },
+                        ),
+                        const SizedBox(height: 15,),
+                        const CustomTitle(
+                          title: 'Password',),
+                        CustomTextField(
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.remove_red_eye_outlined),
+                            color: Colors.grey.shade600,
+                            onPressed: () {
+                              setState(() {
+                                _showPassword =!_showPassword;
+                              });
+                            },),
+                          hintText: 'Enter password',
+                          controller: passwordController,
+                          onChanged: (value){
+                            password = value;
+                            _validatePassword(value);
+                          },
+                          obscureText: _showPassword,
+                          validator: (value){
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }else if (!_isMinLength) {
+                                return 'Password must be at least 8 characters long';
+                              } else if (!_hasNumber) {
+                                return 'Password must contain at least one number';
+                              } else if (!_hasSpecialChar) {
+                                return 'Password must contain at least one special character';
+                            }
+                            // if (value.length < 6) {
+                            //   return 'Password must be at least 6 characters long';
+                            // }if (value.length < 6) {
+                            //   return 'Password must be at least 6 characters long';
+                            // }if (value.length < 6) {
+                            //   return 'Password must be at least 6 characters long';
+                            // }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 10,),
                   // Column(

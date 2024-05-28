@@ -1,5 +1,7 @@
+import 'package:bloom/features/articles/models/article_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../constant/app_color.dart';
 import '../widgets/articles_card.dart';
@@ -181,15 +183,17 @@ class _ArticlesViewState extends State<ArticlesView> {
             SizedBox(height: 30,),
             GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
                 childAspectRatio: 0.9
             ),
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 8,
-                itemBuilder: (context, Index) {
-                  return  ArticlesCard();
+                itemCount: articleList.length,
+                itemBuilder: (context, index) {
+                  return  ArticlesCard(
+                    articleModel: articleList[index]
+                  );
                 }
             ),
           ],
