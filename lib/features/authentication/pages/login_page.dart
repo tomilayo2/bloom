@@ -215,10 +215,10 @@ class _LogInPageState extends State<LogInPage> {
                     text: 'Log in',
                     onTap: (){
                       _formKey.currentState!.validate();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DisclaimerPage()
-                          ));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(builder: (context) => DisclaimerPage()
+                      //     ));
                     },
                   ),
                   // SizedBox(height: 25,),
