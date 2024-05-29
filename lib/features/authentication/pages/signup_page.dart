@@ -51,7 +51,9 @@ class _SignUpPageState extends State<SignUpPage> {
     if(result.isSuccessful){
       Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DisclaimerPage()
+                    MaterialPageRoute(builder: (context) => DisclaimerPage(
+                      email: email,
+                    )
                     ));
     }else{
       toast.show(

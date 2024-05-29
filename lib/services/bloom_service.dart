@@ -48,7 +48,7 @@ class BloomService {
     try{
 
       final response = await client.post(
-          Uri.parse("https://bloom1.onrender.com/loginUser"),
+          Uri.parse("https://bloom1.onrender.com/verify-otp"),
           headers: {'Content-Type': 'application/json',},
           body: json.encode({
             'otp': otp,

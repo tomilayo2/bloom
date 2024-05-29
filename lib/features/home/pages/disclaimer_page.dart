@@ -7,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../Authentication/widgets/app_button.dart';
 
 class DisclaimerPage extends StatelessWidget {
-  const DisclaimerPage({super.key});
+  const DisclaimerPage({super.key, required this.email});
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +87,9 @@ class DisclaimerPage extends StatelessWidget {
                   onTap: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VerifiedPage()
+                        MaterialPageRoute(builder: (context) => VerifiedPage(
+                          email: email,
+                        )
                         ));
                   },
                 ),

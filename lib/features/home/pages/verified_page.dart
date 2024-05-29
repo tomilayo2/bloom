@@ -13,7 +13,8 @@ import '../../Authentication/widgets/app_button.dart';
 import '../widgets/content_otp.dart';
 
 class VerifiedPage extends StatefulWidget {
-  const VerifiedPage({super.key});
+  const VerifiedPage({super.key, required this.email});
+  final String email;
 
   @override
   State<VerifiedPage> createState() => _VerifiedPageState();
@@ -28,7 +29,6 @@ class _VerifiedPageState extends State<VerifiedPage> {
   final bloomService = BloomService();
   final toast = Toastification();
   String _otp = '';
-  final String _email = '';
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _VerifiedPageState extends State<VerifiedPage> {
     _startCountDown();
   }
  void _startCountDown() {
-   Timer.periodic(Duration(seconds:1), (timer) {
+   Timer.periodic(const Duration(seconds:1), (timer) {
      if (_timeLeft > 0) {
        setState(() {
          _timeLeft --;
@@ -48,7 +48,7 @@ class _VerifiedPageState extends State<VerifiedPage> {
    });
  }
   void _resendOtp() {
-   Timer.periodic(Duration(seconds:1), (timer) {
+   Timer.periodic(const Duration(seconds:1), (timer) {
      if (canResend){
        setState(() {
           _timeLeft = 30;
@@ -120,7 +120,7 @@ class _VerifiedPageState extends State<VerifiedPage> {
   }
   void _onVerifyButtonPressed() {
     if (_otp.length == 4) {
-      _verifyOtp(otp: _otp, email: _email);
+      _verifyOtp(otp: _otp, email: widget.email);
     }
   }
 
@@ -208,7 +208,9 @@ class _VerifiedPageState extends State<VerifiedPage> {
                       borderRadius: BorderRadius.circular(8.0)
                     )
                 ),
-                  onCompleted: (pin) => debugPrint(pin),
+                  onCompleted: (pin) {
+                  _otp = pin;
+                  },
                   showCursor: true
 
               ),
