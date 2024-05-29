@@ -113,7 +113,8 @@ class DoctorsCard extends StatelessWidget {
         const SizedBox(height: 16,),
         GestureDetector(
           child: Container(
-            padding: const EdgeInsets.all(10.0),
+            width: double.infinity,
+            padding: const EdgeInsets.all(8.0),
             decoration: const BoxDecoration(
                 color: AppColor.appButtonColor,
                 borderRadius: BorderRadius.all(Radius.circular(7))
@@ -131,7 +132,7 @@ class DoctorsCard extends StatelessWidget {
             ),
           ),
           onTap: (){
-            //Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorProfile()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorProfile()));
           },
         )
       ],

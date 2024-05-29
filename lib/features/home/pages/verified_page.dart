@@ -6,7 +6,9 @@ import 'package:bloom/features/home/pages/step_one.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+import 'package:toastification/toastification.dart';
 import '../../../constant/app_color.dart';
+import '../../../services/bloom_service.dart';
 import '../../Authentication/widgets/app_button.dart';
 import '../widgets/content_otp.dart';
 
@@ -21,6 +23,12 @@ class _VerifiedPageState extends State<VerifiedPage> {
 
   int _timeLeft =  30;
   Timer? _timer;
+  bool canResend = false;
+  bool _isLoading = false;
+  final bloomService = BloomService();
+  final toast = Toastification();
+  String _otp = '';
+  final String _email = '';
 
   @override
   void initState() {
@@ -34,16 +42,88 @@ class _VerifiedPageState extends State<VerifiedPage> {
          _timeLeft --;
        });
      } else {
+       canResend = true;
        _timer?.cancel();
      }
    });
  }
+  void _resendOtp() {
+   Timer.periodic(Duration(seconds:1), (timer) {
+     if (canResend){
+       setState(() {
+          _timeLeft = 30;
+          canResend = false;
+       });
+       _startCountDown();
+     }
+   }
+   );
+   //   if (_timeLeft > 0) {
+   //     setState(() {
+   //       _timeLeft --;
+   //     });
+   //   } else {
+   //     _timer?.cancel();
+   //   }
+   // });
+  }
 
   @override
   void dispose() {
-    _timer?.cancel(); // Ensure the timer is canceled when the widget is disposed.
+    _timer!.cancel(); // Ensure the timer is canceled when the widget is disposed.
     super.dispose();
   }
+
+  Future<void> _verifyOtp({required String otp, required String email}) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final result = await bloomService.verifyOtp(otp:otp, email: email);
+
+    if (!mounted) return;
+
+    setState(() {
+      _isLoading = false;
+    });
+    if (result.isSuccessful) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          actions: [
+            AppButton(
+              text: 'Continue',
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => StepOne()),
+                      (route) => false,
+                );
+              },
+            ),
+          ],
+          title: Image.asset("assets/images/dialogue_image.png"),
+          content: ContentOtp(text: 'OTP verified'),
+        ),
+      );
+    }else{
+      toast.show(
+        context: context,
+        type: ToastificationType.error,
+        style: ToastificationStyle.fillColored,
+        alignment: Alignment.bottomCenter,
+        primaryColor: Colors.red,
+        description: const SizedBox.shrink(),
+        autoCloseDuration: const Duration(seconds: 3),
+        title: Text(result.message),
+      );
+    }
+  }
+  void _onVerifyButtonPressed() {
+    if (_otp.length == 4) {
+      _verifyOtp(otp: _otp, email: _email);
+    }
+  }
+
 
 
   @override
@@ -136,28 +216,38 @@ class _VerifiedPageState extends State<VerifiedPage> {
             SizedBox(height: 30,),
             AppButton(
               text: 'Verify OTP',
-              onTap: (){
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      actions: [
-                        AppButton(
-                          text: 'Continue',
-                          onTap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => StepOne()
-                                ));
-                          },
-                        ),
-                      ],
-                      title: Image.asset("assets/images/dialogue_image.png"),
-                     // contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16,),
-                      content: ContentOtp(text: 'OTP verified',),
-                    ),
-                );
-              },
+              isLoading: _isLoading,
+              onTap: _onVerifyButtonPressed,
             ),
+
+            // AppButton(
+            //   text: 'Verify OTP',
+            //   isLoading: _isLoading,
+            //   onTap: _otp.length == 4 ? _verifyOtp : null,
+              // onTap:(){
+              //   showDialog(
+              //       context: context,
+              //       builder: (context) => AlertDialog(
+              //         actions: [
+              //           AppButton(
+              //             text: 'Continue',
+              //             onTap: () async{
+              //             await _verifyOtp(otp: otp, email: email);
+              //                 (){
+              //               Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(builder: (context) => StepOne()
+              //                   ));
+              //             },
+              //           ),
+              //         ],
+              //         title: Image.asset("assets/images/dialogue_image.png"),
+              //        // contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16,),
+              //         content: ContentOtp(text: 'OTP verified',),
+              //       ),
+              //   );
+              // },
+           // ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -171,8 +261,10 @@ class _VerifiedPageState extends State<VerifiedPage> {
                         color: Color(0xFF000000)
                     ),
                   ),
-                  TextButton(
-                      onPressed: (){},
+                  canResend?TextButton(
+                      onPressed: (){
+                        _resendOtp();
+                      },
                       child: Text(
                           "Resend",
                         style: GoogleFonts.inter(
@@ -181,8 +273,8 @@ class _VerifiedPageState extends State<VerifiedPage> {
                             color: AppColor.appAppColor
                         ),
                       )
-                  ),
-                  Text('$_timeLeft')
+                  ):
+                  Text('00:${_timeLeft.toString()}')
                 ],
               ),
             )

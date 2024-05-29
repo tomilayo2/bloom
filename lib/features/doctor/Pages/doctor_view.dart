@@ -113,6 +113,42 @@ class _DoctorViewState extends State<DoctorView> {
                 )
               ],
             ),
+            // SizedBox(height: 30),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: List.generate(4, (index) {
+            //       return InkWell(
+            //         onTap: () {
+            //           setState(() {
+            //             _buttonIndex = index;
+            //           });
+            //         },
+            //         child: Container(
+            //           margin: EdgeInsets.symmetric(horizontal: 5),
+            //           padding:
+            //           EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.rectangle,
+            //             color: _buttonIndex == index
+            //                 ? AppColor.appPinkColor
+            //                 : AppColor.appGeneralColor,
+            //             borderRadius: BorderRadius.circular(4),
+            //           ),
+            //           child: Text(
+            //             ["All", "Gynecologist", "Paeditrician", "Mental Health"][index],
+            //             style: GoogleFonts.inter(
+            //                 fontSize: 14,
+            //                 fontWeight: FontWeight.w500,
+            //                 color: _buttonIndex == index
+            //                     ? AppColor.appAppColor
+            //                     : AppColor.appSubTitleColor),
+            //           ),
+            //         ),
+            //       );
+            //     }),
+            //   ),
+            // ),
             SizedBox(height: 30,),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -236,6 +272,7 @@ class _DoctorViewState extends State<DoctorView> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
                 childAspectRatio: 0.7,
               ),
               shrinkWrap: true,

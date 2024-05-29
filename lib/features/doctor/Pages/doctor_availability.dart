@@ -1,6 +1,6 @@
 import 'package:bloom/features/Authentication/widgets/app_button.dart';
 import 'package:bloom/features/home/pages/Reminder_page.dart';
-import 'package:bloom/features/home/pages/confirm_appointment.dart';
+import 'package:bloom/features/doctor/Pages/confirm_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -71,45 +71,45 @@ class _DoctorAvailabilityState extends State<DoctorAvailability> {
               SizedBox(height: 20,),
               AvailableTime(
                 title: '2:30 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '3:20 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '4:00 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '5:00 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '5:30 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '8:30 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 20,),
               AvailableTime(
                 title: '11:30 P.M',
-                onTap: (){},
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));},
               ),
               SizedBox(height: 30,),
-              AppButton(
-                  text: "Continue",
-                onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));
-                },
-              )
+              // AppButton(
+              //     text: "Continue",
+              //   onTap: (){
+              //       Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmAppointment()));
+              //   },
+              // )
             ],
           )
         ],

@@ -27,7 +27,7 @@ class AvailableTime extends StatelessWidget {
           )
       ),
       child: GestureDetector(
-          onTap: (){},
+          onTap: onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -2,6 +2,8 @@ import 'package:bloom/constant/app_color.dart';
 import 'package:bloom/features/Authentication/pages/login_page.dart';
 import 'package:bloom/features/Authentication/widgets/social_button.dart';
 import 'package:bloom/features/home/pages/disclaimer_page.dart';
+import 'package:bloom/features/home/pages/home_page.dart';
+import 'package:bloom/features/home/pages/home_view.dart';
 import 'package:bloom/services/bloom_service.dart';
 import 'package:bloom/utils/validation.dart';
 import 'package:flutter/material.dart';
@@ -82,10 +84,23 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
+  String? validateEmail(String? value) {
+    if (!RegExp(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{1,253}[a-zA-Z0-9])?)+$")
+        .hasMatch(value ?? "") ||
+        !value!.endsWith('.com')) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf5f5f5),
+      //backgroundColor: Color(0xFFf5f5f5),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,14 +186,15 @@ class _SignUpPageState extends State<SignUpPage> {
                          onChanged: (value){
                           email = value;
                          },
-                         validator: (value) {
-                           if (value == null || value.isEmpty) {
-                             return 'Please enter an email';
-                           } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                             return 'Please enter a valid email address';
-                           }
-                           return null;
-                         },
+                          validator: validateEmail,
+                         // validator: (value) {
+                         //   if (value == null || value.isEmpty) {
+                         //     return 'Please enter an email';
+                         //   } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                         //     return 'Please enter a valid email address';
+                         //   }
+                         //   return null;
+                         // },
                         ),
                         const SizedBox(height: 15,),
                         const CustomTitle(
@@ -405,7 +421,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     isLoading: _isLoading,
                     text: 'Sign Up',
                     onTap: ()async {
-                      await _registerUser(email: email, password: password);
+                        await _registerUser(email: email, password: password);
+                       //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                     },
                   ),
                   // SizedBox(height: 20,),

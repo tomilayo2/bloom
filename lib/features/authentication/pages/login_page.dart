@@ -1,9 +1,13 @@
 import 'package:bloom/features/Authentication/pages/signup_page.dart';
+import 'package:bloom/features/home/pages/home_view.dart';
+import 'package:bloom/services/bloom_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toastification/toastification.dart';
 
 import '../../../constant/app_color.dart';
 import '../../home/pages/disclaimer_page.dart';
+import '../../home/pages/home_page.dart';
 import '../widgets/app_button.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/custom_title.dart';
@@ -17,12 +21,15 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   bool _showPassword = true;
+  bool _isLoading = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String email = "";
   String password = "";
+  final bloomService = BloomService();
+  final toast = Toastification();
   String? validateEmail(String? value) {
     if (!RegExp(
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{1,253}[a-zA-Z0-9])?)+$")
@@ -32,17 +39,36 @@ class _LogInPageState extends State<LogInPage> {
     }
     return null;
   }
-  // bool _isMinLength = false;
-  // bool _hasNumber = false;
-  // bool _hasSpecialChar = false;
+  Future<void> _loginUser({required String email, required String password}) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final result = await bloomService.loginUser(email: email, password: password);
 
-  // void _validatePassword(String value) {
-  //   setState(() {
-  //     _isMinLength = value.length >= 6;
-  //     _hasNumber = value.contains(RegExp(r'\d'));
-  //     _hasSpecialChar = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-  //   });
-  // }
+    if (!mounted) return;
+
+    setState(() {
+      _isLoading = false;
+    });
+    if(result.isSuccessful){
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeView()
+          ));
+    }else{
+      toast.show(
+        context: context,
+        type: ToastificationType.error,
+        style: ToastificationStyle.fillColored,
+        alignment: Alignment.bottomCenter,
+        primaryColor: Colors.red,
+        description: const SizedBox.shrink(),
+        autoCloseDuration: const Duration(seconds: 3),
+        title: Text(result.message),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +152,7 @@ class _LogInPageState extends State<LogInPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const CustomTitle(
-                          title: 'Email Address/Phone Number',),
+                          title: 'Email Address',),
                         CustomTextField(
                           hintText: 'Email Address',
                           keyboardType: TextInputType.emailAddress,
@@ -212,9 +238,12 @@ class _LogInPageState extends State<LogInPage> {
                   //   ),
                   // ),
                   AppButton(
+                    isLoading: _isLoading,
                     text: 'Log in',
-                    onTap: (){
+                    onTap: () async{
+                       await _loginUser(email: email, password: password);
                       _formKey.currentState!.validate();
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(builder: (context) => DisclaimerPage()

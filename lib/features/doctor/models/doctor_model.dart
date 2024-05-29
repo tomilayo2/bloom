@@ -25,7 +25,7 @@ List<DoctorModel> doctorList = [
       imagePath: 'assets/images/tomi_two_image.png',
       isTopRated: true,
       isFavorite: true,
-      name: 'Dr Oluwatomi Ogundijo',
+      name: 'Dr Oluwatomi Ogundijo' ,
       specialization: 'Cardiologist',
       location: 'UK',
       rating: 4.0 ,

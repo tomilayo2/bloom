@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constant/app_color.dart';
 import '../../Authentication/widgets/custom_title.dart';
+import '../../home/widgets/content_otp.dart';
 
 class ConfirmAppointment extends StatefulWidget {
   const ConfirmAppointment({super.key});
@@ -300,7 +301,30 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
               SizedBox(height: 40,),
               AppButton(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReminderPage()));
+                  showDialog(context: context, builder: (context) => AlertDialog(
+                    actions: [
+                      AppButton(
+                        text: 'Open invitation',
+                        onTap: (){
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                    title: Image.asset("assets/images/dialogue_image.png"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ContentOtp(text: 'Booking Successful',),
+                        Text(
+                          "A calendar invitation has been sent to your phone number",
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+
+                    ),
+                  ));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ReminderPage()));
                 },
                   text: "Book Appointment",
               )

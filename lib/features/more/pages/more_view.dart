@@ -1,3 +1,4 @@
+import 'package:bloom/features/more/pages/view_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,9 +62,11 @@ class MoreView extends StatelessWidget {
                   Container(
                     height: 30,
                     child: TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewProfile()));
+                        },
                         child: Text(
-                            "Edit Profile",
+                            "View Profile",
                           style: GoogleFonts.inter(
                               fontSize: 10,
                               color: AppColor.appAppColor,
