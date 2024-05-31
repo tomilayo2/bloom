@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:bloom/features/articles/models/blog_post_model.dart';
 import 'package:bloom/services/response_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -60,6 +61,17 @@ class BloomService {
       return ResponseModel.fromJson(result);
     }catch(e){
       return ResponseModel(isSuccessful: false, message: 'Something went wrong');
+    }
+  }
+
+  Future<BlogPostModel> getBlogPosts() async{
+    try{
+      final response = await client.get(Uri.parse("https://bloom1.onrender.com/blogpost"));
+      Map<String, dynamic> result = json.decode(response.body);
+      log(response.body);
+      return BlogPostModel.fromJson(result);
+    }catch(e){
+      return const BlogPostModel(sys: null, total: 0, skip: 0, limit: 0, items: []);
     }
   }
 }

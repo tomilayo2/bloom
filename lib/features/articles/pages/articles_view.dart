@@ -1,4 +1,5 @@
 import 'package:bloom/features/articles/models/article_model.dart';
+import 'package:bloom/services/bloom_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
@@ -24,6 +25,17 @@ class _ArticlesViewState extends State<ArticlesView> {
   // Saved Widget(),
   Container()
 ];
+
+  final bloomService = BloomService();
+
+  Future<void> getBlogPosts() async {
+    final result = await bloomService.getBlogPosts();
+    if(result.items.isNotEmpty){
+      print('We got ${result.items.length} items');
+    }else{
+      print('No items');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
