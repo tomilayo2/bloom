@@ -13,14 +13,14 @@ class ArticleModel{
 
 List<ArticleModel> articleList = [
   ArticleModel(
-      imagePath: "assets/images/fruit_image.png",
-      text:  "Fruits to eat while pregnant",
-      subtitle: "Banana and pumpkins are great \nfruits for healthy baby develop...",
+      imagePath: "assets/images/blog_meal.png",
+      text:  "Conquering Postpartum Stress: New",
+      subtitle: "Drinking a cup of milk daily helps the baby in the womb build strong bones, and fight against calcium deficiency. The requirement for the amount to take ...",
   ),
   ArticleModel(
-      imagePath: "assets/images/article_image_one.png",
-      text:  "The importance of reading boo",
-      subtitle: "Learning about better ways to balance your work and baby bu...",
+      imagePath: "assets/images/blog_exercise.png",
+      text:  "Why is my baby skin with rashes?",
+      subtitle: "Newborn skin is oh-so-soft, but it can also be prone to rashes. These can be alarming for new parents, but rest assured, most baby rashes are harmless and cla...",
   ),
   ArticleModel(
       imagePath: "assets/images/article_image_two.png",

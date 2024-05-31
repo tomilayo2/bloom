@@ -255,13 +255,17 @@ class _VerifiedPageState extends State<VerifiedPage> {
               child: Row(
                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                      "Didn't receive OTP?",
-                    style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF000000)
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                          "Didn't receive OTP?",
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF000000)
+                        ),
+                      ),
+                    ],
                   ),
                   canResend?TextButton(
                       onPressed: (){

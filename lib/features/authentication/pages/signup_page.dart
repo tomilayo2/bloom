@@ -424,7 +424,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: 'Sign Up',
                     onTap: ()async {
                         await _registerUser(email: email, password: password);
-                       //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => DisclaimerPage(email: email)));
                     },
                   ),
                   // SizedBox(height: 20,),

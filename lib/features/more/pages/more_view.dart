@@ -1,3 +1,4 @@
+import 'package:bloom/features/Authentication/pages/login_page.dart';
 import 'package:bloom/features/more/pages/view_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import '../../../constant/app_color.dart';
 import '../../Authentication/widgets/app_button.dart';
 import '../../home/pages/home_page.dart';
 import '../widgets/custom_more.dart';
+import '../widgets/image_button.dart';
 
 class MoreView extends StatelessWidget {
   const MoreView({super.key});
@@ -178,7 +180,13 @@ class MoreView extends StatelessWidget {
               Image.asset("assets/images/logout_image.png"),
               SizedBox(width: 10,),
               TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LogInPage())
+                    );
+
+                  },
                   child: Text(
                       "Log Out",
                     style: GoogleFonts.inter(
@@ -186,13 +194,50 @@ class MoreView extends StatelessWidget {
                         color: AppColor.appLogColor,
                         fontWeight: FontWeight.w500
                     ),
-                  )
-              )
+                  ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15),
+          Text(
+              "Follow us on:",
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                color: AppColor.appTextColor,
+                fontWeight: FontWeight.w500
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ImageButton(
+                imagePath: "assets/images/logo_ vector.png",
+                onTap: () {},
+              ),
+              SizedBox(width: 10,),
+              ImageButton(
+                imagePath: "assets/images/instagram_logo.png",
+                onTap: () {},
+              ),
+              SizedBox(width: 10,),
+              ImageButton(
+                imagePath: "assets/images/twitter_logo.png",
+                onTap: () {},
+              ),
+              SizedBox(width: 10,),
+              ImageButton(
+                imagePath: "assets/images/youtube logo.png",
+                onTap: () {},
+              ),
             ],
           )
+          //Image.asset("assets/images/logo_ vector.png")
+
         ],
       ),
     );
   }
 }
+
+
 

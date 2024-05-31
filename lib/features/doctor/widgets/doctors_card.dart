@@ -75,7 +75,7 @@ class DoctorsCard extends StatelessWidget {
           doctorModel.name,
           style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
-              fontSize: 16,
+              fontSize: 14,
               color: AppColor.appTextColor
           ),
         ),
@@ -113,7 +113,7 @@ class DoctorsCard extends StatelessWidget {
         const SizedBox(height: 16,),
         GestureDetector(
           child: Container(
-            width: double.infinity,
+             width: double.infinity,
             padding: const EdgeInsets.all(8.0),
             decoration: const BoxDecoration(
                 color: AppColor.appButtonColor,

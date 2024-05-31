@@ -33,7 +33,7 @@ class ArticlesCard extends StatelessWidget {
          articleModel.text,
           style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
-              fontSize: 12,
+              fontSize: 10.5,
               color: AppColor.appTextColor
           ),
         ),
@@ -41,7 +41,7 @@ class ArticlesCard extends StatelessWidget {
           articleModel.subtitle,
           style: GoogleFonts.inter(
               fontWeight: FontWeight.w500,
-              fontSize: 10,
+              fontSize: 8,
               color: AppColor.appSubTitleColor
           ),
         ),

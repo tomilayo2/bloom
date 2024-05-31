@@ -16,9 +16,44 @@ class DoctorProfile extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         children: [
-          SizedBox(
-            child: Image.asset("assets/images/rectangle_image.png",),
+          // SizedBox(
+          //   child: Image.asset("assets/images/rectangle_image.png",),
+          // ),
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 120,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFFFA9B4), Color(0xFFEADAFF)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+               Positioned(
+                left: 20,
+                bottom: 0.3,
+
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColor.appGeneralColor
+                  ),
+                  child: Image.asset(
+                      "assets/images/doctor_profile.png",
+                    // height: 50,
+                    // width: 50,
+                  ),
+                ),
+              ),
+            ],
+
           ),
+
           SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

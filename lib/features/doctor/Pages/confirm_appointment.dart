@@ -1,5 +1,6 @@
 import 'package:bloom/features/Authentication/widgets/app_button.dart';
 import 'package:bloom/features/home/pages/Reminder_page.dart';
+import 'package:bloom/features/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -93,7 +94,7 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
                   Image.asset("assets/icons/calendar_icon.png"),
                   SizedBox(width: 10,),
                   Text(
-                      "Wednesday, May 15, 2024",
+                      "Wednesday, June 12, 2024",
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
@@ -304,10 +305,11 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
                   showDialog(context: context, builder: (context) => AlertDialog(
                     actions: [
                       AppButton(
-                        text: 'Open invitation',
+                        text: 'Return Home',
                         onTap: (){
                           Navigator.pop(context);
-                          Navigator.pop(context);
+                         // Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                         },
                       ),
                     ],
@@ -316,10 +318,10 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ContentOtp(text: 'Booking Successful',),
-                        Text(
-                          "A calendar invitation has been sent to your phone number",
-                          textAlign: TextAlign.center,
-                        )
+                        // Text(
+                        //   "A calendar invitation has been sent to your phone number",
+                        //   textAlign: TextAlign.center,
+                        // )
                       ],
 
                     ),

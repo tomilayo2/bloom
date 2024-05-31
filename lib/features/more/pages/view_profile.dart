@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../constant/app_color.dart';
 import '../../Authentication/widgets/custom_textfield.dart';
 import '../../Authentication/widgets/custom_title.dart';
+import '../../doctor/Pages/doctor_profile.dart';
 import '../widgets/profile_textfield.dart';
 
 class ViewProfile extends StatefulWidget {
@@ -161,6 +162,32 @@ class _ViewProfileState extends State<ViewProfile> {
           hintText: 'N/A',
             keyboardText: TextInputType.datetime,
           ),
+          SizedBox(height: 20,),
+          GestureDetector(
+            child: Container(
+              width: double.infinity,
+              height: 50,
+              padding: const EdgeInsets.all(8.0),
+              decoration: const BoxDecoration(
+                  color: AppColor.appButtonColor,
+                  borderRadius: BorderRadius.all(Radius.circular(7))
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Update Profile",
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: AppColor.appTextColor
+                  ),
+                ),
+              ),
+            ),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorProfile()));
+            },
+          )
         ],
       ),
     );

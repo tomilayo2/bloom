@@ -102,6 +102,12 @@ class _DoctorViewState extends State<DoctorView> {
                       color: AppColor.appGenericColor
                   ),
                 ),
+                ListView(
+
+                  children: [
+                 // DoctorsCard(doctorModel: doctorModel)
+                  ],
+                ),
                 SizedBox(height: 10,),
                 Text(
                     "You have no sessions",
@@ -272,7 +278,7 @@ class _DoctorViewState extends State<DoctorView> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+               // mainAxisSpacing: 20,
                 childAspectRatio: 0.7,
               ),
               shrinkWrap: true,

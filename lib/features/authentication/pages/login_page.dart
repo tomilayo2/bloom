@@ -241,9 +241,9 @@ class _LogInPageState extends State<LogInPage> {
                     isLoading: _isLoading,
                     text: 'Log in',
                     onTap: () async{
-                       await _loginUser(email: email, password: password);
+                       // await _loginUser(email: email, password: password);
                       _formKey.currentState!.validate();
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(builder: (context) => DisclaimerPage()
