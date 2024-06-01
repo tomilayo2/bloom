@@ -102,12 +102,13 @@ class _DoctorViewState extends State<DoctorView> {
                       color: AppColor.appGenericColor
                   ),
                 ),
-                ListView(
-
-                  children: [
-                 // DoctorsCard(doctorModel: doctorModel)
-                  ],
-                ),
+               Column(
+                 children: [
+                   Container(
+                     child: Image.asset("assets/images/doctor_image_one.png"),
+                   )
+                 ],
+               ),
                 SizedBox(height: 10,),
                 Text(
                     "You have no sessions",

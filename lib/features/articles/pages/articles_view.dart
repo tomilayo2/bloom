@@ -28,13 +28,18 @@ class _ArticlesViewState extends State<ArticlesView> {
 
   final bloomService = BloomService();
 
-  Future<void> getBlogPosts() async {
+  void getBlogPosts() async {
     final result = await bloomService.getBlogPosts();
     if(result.items.isNotEmpty){
       print('We got ${result.items.length} items');
     }else{
       print('No items');
     }
+  }
+  @override
+  void initState() {
+    getBlogPosts();
+    super.initState();
   }
 
   @override

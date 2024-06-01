@@ -48,7 +48,7 @@ class ArticlesCard extends StatelessWidget {
         SizedBox(height: 15,),
         GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> ArticlePage()));
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=> ArticlePage()));
           },
           child: Text(
             "Learn more",
