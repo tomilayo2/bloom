@@ -166,10 +166,11 @@ class _ViewProfileState extends State<ViewProfile> {
           GestureDetector(
             child: Container(
               width: double.infinity,
-              height: 50,
+              height: 40,
               padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: const BoxDecoration(
-                  color: AppColor.appButtonColor,
+                  color: Color(0xFFFFEEF0),
                   borderRadius: BorderRadius.all(Radius.circular(7))
               ),
               child: Align(
@@ -179,7 +180,7 @@ class _ViewProfileState extends State<ViewProfile> {
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
-                      color: AppColor.appTextColor
+                      color: Color(0xFF98A2B3),
                   ),
                 ),
               ),

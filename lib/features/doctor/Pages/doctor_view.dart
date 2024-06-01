@@ -6,6 +6,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../../constant/app_color.dart';
 import '../widgets/doctors_card.dart';
+import 'doctor_profile.dart';
 
 class DoctorView extends StatefulWidget {
   const DoctorView({super.key});
@@ -102,16 +103,9 @@ class _DoctorViewState extends State<DoctorView> {
                       color: AppColor.appGenericColor
                   ),
                 ),
-               Column(
-                 children: [
-                   Container(
-                     child: Image.asset("assets/images/doctor_image_one.png"),
-                   )
-                 ],
-               ),
                 SizedBox(height: 10,),
                 Text(
-                    "You have no sessions",
+                  "You have no sessions",
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
@@ -120,6 +114,47 @@ class _DoctorViewState extends State<DoctorView> {
                 )
               ],
             ),
+           // Row(
+           //    children: [
+           //      Column(
+           //        children: [
+           //          Container(
+           //            child: Image.asset("assets/images/doctor_image_one.png"),
+           //          ),
+           //          Text(" Dr Oluwatomi Ogundijo"),
+           //          Text("Cardiologist, UK"),
+           //          Text("13/05/2024 (7:30P.M)"),
+           //          const SizedBox(height: 16,),
+           //          GestureDetector(
+           //            child: Container(
+           //              width: double.infinity,
+           //              padding: const EdgeInsets.all(8.0),
+           //              decoration: const BoxDecoration(
+           //                  color: AppColor.appGeneralColor,
+           //                  borderRadius: BorderRadius.all(Radius.circular(7))
+           //              ),
+           //              child: Align(
+           //                alignment: Alignment.center,
+           //                child: Text(
+           //                  "Check Availability",
+           //                  style: GoogleFonts.inter(
+           //                      fontWeight: FontWeight.w600,
+           //                      fontSize: 14,
+           //                      color: AppColor.appTextColor
+           //                  ),
+           //                ),
+           //              ),
+           //            ),
+           //            onTap: (){
+           //              Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorProfile()));
+           //            },
+           //          ),
+           //
+           //        ],
+           //      ),
+           //    ],
+           //  ),
+
             // SizedBox(height: 30),
             // SingleChildScrollView(
             //   scrollDirection: Axis.horizontal,
